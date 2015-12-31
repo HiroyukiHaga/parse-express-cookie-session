@@ -70,7 +70,7 @@ module.exports = function (options) {
 
     // Expect express.cookieParser to set req.secret before this middleware.
     var signatureSecret = req.secret;
-    if (Parse._.isEmpty(signatureSecret)) {
+    if (_.isEmpty(signatureSecret)) {
       throw new Error('express.cookieParser middleware must be included' +
         'before this, and initialized with a signing secret');
     }
@@ -89,7 +89,7 @@ module.exports = function (options) {
     var reqParseUserSession;
     var reqCookieJson;  // Used later to determine whether to set response cookie.
     var reqCookieBody = req.cookies[key];
-    if (!Parse._.isEmpty(reqCookieBody)) {
+    if (!_.isEmpty(reqCookieBody)) {
       try {
 
         reqCookieJson = JSON.parse(reqCookieBody);
@@ -97,7 +97,7 @@ module.exports = function (options) {
         if (reqCookieJson && !reqCookieJson.id || !reqCookieJson.sessionToken) {
           throw "Invalid session";
         }
-        /*if (!Parse._.isEmpty(reqCookieJson)) {
+        /*if (!_.isEmpty(reqCookieJson)) {
           reqParseUserSession = utils.parseJSONCookie(reqCookieJson);
         }*/
       } catch (e) {
@@ -111,7 +111,7 @@ module.exports = function (options) {
     res.on('header', function() {
       var resParseUserSession = getCurrentParseUserSession();
       // If user is logged out, clear cookie.
-      if (Parse._.isUndefined(resParseUserSession)) {
+      if (_.isUndefined(resParseUserSession)) {
         cookie.expires = new Date(0);
         res.setHeader('Set-Cookie', cookie.serialize(key, ''));
         return;
