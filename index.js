@@ -1,4 +1,4 @@
-var Parse = require('parse/node')
+var Parse = require("parse-cloud").Parse;
 
 var _ = require("underscore");
 var Cookie = function(options){
