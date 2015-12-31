@@ -1,4 +1,4 @@
-
+var Parse = require('parse/node')
 
 var _ = require("underscore");
 var Cookie = function(options){
